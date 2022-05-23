@@ -1,4 +1,6 @@
-void fooBar() {
-  // Hello World
-  return 2 + 3;
-}
+int fooBar() {
+    int a = 0; 
+    // line
+    return 2 + 3;
+  }
+

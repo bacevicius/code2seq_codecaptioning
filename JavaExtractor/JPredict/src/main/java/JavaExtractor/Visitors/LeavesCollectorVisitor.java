@@ -8,17 +8,24 @@ import com.github.javaparser.ast.expr.NullLiteralExpr;
 import com.github.javaparser.ast.stmt.Statement;
 import com.github.javaparser.ast.type.ClassOrInterfaceType;
 import com.github.javaparser.ast.visitor.TreeVisitor;
+import com.github.javaparser.ast.comments.JavadocComment;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class LeavesCollectorVisitor extends TreeVisitor {
     private final ArrayList<Node> m_Leaves = new ArrayList<>();
 
     @Override
     public void process(Node node) {
+        // If node has comment add it to leaves. Check if it is not javadoc or contains code.
+        Optional<Comment> com = node.getComment();
+        if(com.isPresent() && !(com.get() instanceof JavadocComment) && !containsCode(com.get().getContent())) {
+          m_Leaves.add(node);
+        }
+
         if (node instanceof Comment) {
-            m_Leaves.add(node);
             return;
         }
         boolean isLeaf = false;
@@ -34,6 +41,10 @@ public class LeavesCollectorVisitor extends TreeVisitor {
         node.setData(Common.ChildId, childId);
         Property property = new Property(node, isLeaf, isGenericParent);
         node.setData(Common.PropertyKey, property);
+    }
+
+    private boolean containsCode(String comment) {
+        return ("//" + comment).matches("^\\s*.*;\\s*$");
     }
 
     private boolean isGenericParent(Node node) {

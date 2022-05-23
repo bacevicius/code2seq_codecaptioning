@@ -11,6 +11,7 @@ import com.github.javaparser.ParseProblemException;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.Node;
 import com.github.javaparser.printer.DotPrinter;
+import com.github.javaparser.ast.comments.LineComment;
 
 import java.util.ArrayList;
 import java.util.HashSet;

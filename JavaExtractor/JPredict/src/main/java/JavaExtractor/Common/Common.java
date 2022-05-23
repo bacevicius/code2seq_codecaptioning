@@ -7,6 +7,9 @@ import com.github.javaparser.ast.DataKey;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.regex.*;
 
 public final class Common {
     public static final DataKey<Property> PropertyKey = new DataKey<Property>() {
@@ -57,6 +60,12 @@ public final class Common {
         String str3 = str2.trim();
         return Stream.of(str3.split("(?<=[a-z])(?=[A-Z])|_|[0-9]|(?<=[A-Z])(?=[A-Z][a-z])|\\s+"))
                 .filter(s -> s.length() > 0).map(s -> Common.normalizeName(s, Common.EmptyString))
+                .filter(s -> s.length() > 0).map(s -> parseComment(s))
                 .filter(s -> s.length() > 0).collect(Collectors.toCollection(ArrayList::new));
     }
+
+    public static String parseComment(String comment) {
+        String parsed = comment.replaceAll("[^a-zA-Z0-9]", "");
+        return parsed;
+  }
 }
