@@ -2,6 +2,5 @@
 *.lst
 .idea/*
 *.iml
-*.xml
 *.pyc
 *.out

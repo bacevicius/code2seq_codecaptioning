@@ -1,0 +1,27 @@
+digraph {
+n7 [label="member (MethodDeclaration)"];
+n8 [label="body (BlockStmt)"];
+n7 -> n8;
+n9 [label="statements"];
+n8 -> n9;
+n10 [label="statement (ReturnStmt)"];
+n9 -> n10;
+n11 [label="expression (BinaryExpr)"];
+n10 -> n11;
+n12 [label="operator='PLUS'"];
+n11 -> n12;
+n13 [label="left (IntegerLiteralExpr)"];
+n11 -> n13;
+n14 [label="value='2'"];
+n13 -> n14;
+n15 [label="right (IntegerLiteralExpr)"];
+n11 -> n15;
+n16 [label="value='3'"];
+n15 -> n16;
+n17 [label="type (VoidType)"];
+n7 -> n17;
+n18 [label="name (SimpleName)"];
+n7 -> n18;
+n19 [label="identifier='fooBar'"];
+n18 -> n19;
+}
