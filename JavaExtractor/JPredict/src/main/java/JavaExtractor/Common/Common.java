@@ -2,16 +2,16 @@ package JavaExtractor.Common;
 
 import JavaExtractor.FeaturesEntities.Property;
 import com.github.javaparser.ast.Node;
-import com.github.javaparser.ast.UserDataKey;
+import com.github.javaparser.ast.DataKey;
 
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public final class Common {
-    public static final UserDataKey<Property> PropertyKey = new UserDataKey<Property>() {
+    public static final DataKey<Property> PropertyKey = new DataKey<Property>() {
     };
-    public static final UserDataKey<Integer> ChildId = new UserDataKey<Integer>() {
+    public static final DataKey<Integer> ChildId = new DataKey<Integer>() {
     };
     public static final String EmptyString = "";
 
@@ -43,7 +43,7 @@ public final class Common {
     }
 
     public static boolean isMethod(Node node, String type) {
-        Property parentProperty = node.getParentNode().getUserData(Common.PropertyKey);
+        Property parentProperty = node.getParentNode().get().getData(Common.PropertyKey);
         if (parentProperty == null) {
             return false;
         }

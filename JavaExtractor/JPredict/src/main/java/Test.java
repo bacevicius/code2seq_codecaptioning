@@ -1,5 +1,9 @@
 class Test {
+  /**
+    labas
+  */
     void fooBar() {
-        System.out.println("http://github.com");
+        // Gera diena
+        System.out.println("http://puslapis.com");
     }
 }

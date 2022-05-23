@@ -31,8 +31,8 @@ public class FunctionVisitor extends VoidVisitorAdapter<Object> {
         leavesCollectorVisitor.visitDepthFirst(node);
         ArrayList<Node> leaves = leavesCollectorVisitor.getLeaves();
 
-        String normalizedMethodName = Common.normalizeName(node.getName(), Common.BlankWord);
-        ArrayList<String> splitNameParts = Common.splitToSubtokens(node.getName());
+        String normalizedMethodName = Common.normalizeName(node.getName().toString(), Common.BlankWord);
+        ArrayList<String> splitNameParts = Common.splitToSubtokens(node.getName().toString());
         String splitName = normalizedMethodName;
         if (splitNameParts.size() > 0) {
             splitName = String.join(Common.internalSeparator, splitNameParts);
