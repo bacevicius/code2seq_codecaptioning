@@ -5,10 +5,14 @@ import JavaExtractor.Common.Common;
 import JavaExtractor.Common.MethodContent;
 import com.github.javaparser.ast.Node;
 import com.github.javaparser.ast.body.MethodDeclaration;
+import com.github.javaparser.ast.comments.Comment;
+import com.github.javaparser.ast.comments.JavadocComment;
 import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
 
 @SuppressWarnings("StringEquality")
 public class FunctionVisitor extends VoidVisitorAdapter<Object> {
@@ -30,8 +34,20 @@ public class FunctionVisitor extends VoidVisitorAdapter<Object> {
         LeavesCollectorVisitor leavesCollectorVisitor = new LeavesCollectorVisitor();
         leavesCollectorVisitor.visitDepthFirst(node);
         ArrayList<Node> leaves = leavesCollectorVisitor.getLeaves();
-        String normalizedMethodName = Common.normalizeName(node.getName().toString(), Common.BlankWord);
-        ArrayList<String> splitNameParts = Common.splitToSubtokens(node.getName().toString());
+
+        Optional<JavadocComment> comment = node.getJavadocComment();
+        String commentString = "";
+
+        if (comment.isPresent()){
+            commentString = comment.get().getContent();
+            System.out.println(commentString);
+        }
+        else {
+            return;
+        }
+
+        String normalizedMethodName = Common.normalizeName(commentString, Common.BlankWord);
+        ArrayList<String> splitNameParts = Common.splitToSubtokens(commentString);
         String splitName = normalizedMethodName;
         if (splitNameParts.size() > 0) {
             splitName = String.join(Common.internalSeparator, splitNameParts);

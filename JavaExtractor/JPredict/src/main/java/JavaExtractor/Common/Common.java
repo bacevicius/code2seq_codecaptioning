@@ -2,6 +2,7 @@ package JavaExtractor.Common;
 
 import JavaExtractor.FeaturesEntities.Property;
 import com.github.javaparser.ast.Node;
+import com.github.javaparser.ast.expr.SimpleName;
 import com.github.javaparser.ast.DataKey;
 
 import java.util.ArrayList;
@@ -26,15 +27,15 @@ public final class Common {
     public static final String methodName = "METHOD_NAME";
     public static final String internalSeparator = "|";
 
-    public static String normalizeName(String original, String defaultString) {
-        original = original.toLowerCase().replaceAll("\\\\n", "") // escaped new
+    public static String normalizeName(String string, String defaultString) {
+        string = string.toLowerCase().replaceAll("\\\\n", "") // escaped new
                 // lines
                 .replaceAll("//s+", "") // whitespaces
                 .replaceAll("[\"',]", "") // quotes, apostrophies, commas
                 .replaceAll("\\P{Print}", ""); // unicode weird characters
-        String stripped = original.replaceAll("[^A-Za-z]", "");
+        String stripped = string.replaceAll("[^A-Za-z]", "");
         if (stripped.length() == 0) {
-            String carefulStripped = original.replaceAll(" ", "_");
+            String carefulStripped = string.replaceAll(" ", "_");
             if (carefulStripped.length() == 0) {
                 return defaultString;
             } else {
@@ -55,8 +56,8 @@ public final class Common {
         return Common.NameExpr.equals(type) && Common.MethodDeclaration.equals(parentType);
     }
 
-    public static ArrayList<String> splitToSubtokens(String str1) {
-        String str2 = str1.replace("|", " ");
+    public static ArrayList<String> splitToSubtokens(String string) {
+        String str2 = string.replace("|", " ");
         String str3 = str2.trim();
         return Stream.of(str3.split("(?<=[a-z])(?=[A-Z])|_|[0-9]|(?<=[A-Z])(?=[A-Z][a-z])|\\s+"))
                 .filter(s -> s.length() > 0).map(s -> Common.normalizeName(s, Common.EmptyString))

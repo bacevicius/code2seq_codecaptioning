@@ -49,7 +49,7 @@ public class LeavesCollectorVisitor extends TreeVisitor {
 
     private boolean isGenericParent(Node node) {
         return (node instanceof ClassOrInterfaceType)
-                && ((ClassOrInterfaceType) node).getTypeArguments() != null
+                && ((ClassOrInterfaceType) node).getTypeArguments().isPresent()
                 && ((ClassOrInterfaceType) node).getTypeArguments().get().size() > 0;
     }
 
