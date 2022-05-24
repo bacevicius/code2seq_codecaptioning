@@ -4,6 +4,8 @@ import JavaExtractor.Common.CommandLineValues;
 import JavaExtractor.Common.Common;
 import JavaExtractor.FeaturesEntities.ProgramFeatures;
 import org.apache.commons.lang3.StringUtils;
+import com.github.javaparser.JavaParser;
+import com.github.javaparser.utils.StringEscapeUtils;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
@@ -15,11 +17,11 @@ import java.util.concurrent.Callable;
 
 class ExtractFeaturesTask implements Callable<Void> {
     private final CommandLineValues m_CommandLineValues;
-    private final Path filePath;
+    private final String codeLine;
 
-    public ExtractFeaturesTask(CommandLineValues commandLineValues, Path path) {
+    public ExtractFeaturesTask(CommandLineValues commandLineValues, String codeLine) {
         m_CommandLineValues = commandLineValues;
-        this.filePath = path;
+        this.codeLine = codeLine;
     }
 
     @Override
@@ -47,21 +49,12 @@ class ExtractFeaturesTask implements Callable<Void> {
     }
 
     private ArrayList<ProgramFeatures> extractSingleFile() throws IOException {
-        String code;
+        String code = codeLine.substring(2, codeLine.length() - 2); //Remove json object remnants from string
+        String unescapedCode = StringEscapeUtils.unescapeJava(code); //Unescape characters so it parses to Java
 
-        if (m_CommandLineValues.MaxFileLength > 0 &&
-                Files.lines(filePath, Charset.defaultCharset()).count() > m_CommandLineValues.MaxFileLength) {
-            return new ArrayList<>();
-        }
-        try {
-            code = new String(Files.readAllBytes(filePath));
-        } catch (IOException e) {
-            e.printStackTrace();
-            code = Common.EmptyString;
-        }
         FeatureExtractor featureExtractor = new FeatureExtractor(m_CommandLineValues);
 
-        return featureExtractor.extractFeatures(code);
+        return featureExtractor.extractFeatures(unescapedCode);
     }
 
     public String featuresToString(ArrayList<ProgramFeatures> features) {
