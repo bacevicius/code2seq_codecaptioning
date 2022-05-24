@@ -21,10 +21,10 @@
 #   recommended to use a multi-core machine for the preprocessing 
 #   step and set this value to the number of cores.
 # PYTHON - python3 interpreter alias.
-TRAIN_DIR=data/java-small/training
-VAL_DIR=data/java-small/validation
-TEST_DIR=data/java-small/test
-DATASET_NAME=small-processed-comments
+TRAIN_DIR=funcom_dataset/train
+VAL_DIR=funcom_dataset/valid
+TEST_DIR=funcom_dataset/test
+DATASET_NAME=funcom_with_comments
 
 MAX_DATA_CONTEXTS=1000
 MAX_CONTEXTS=200
@@ -34,10 +34,14 @@ NUM_THREADS=64
 PYTHON=python3
 ###########################################################
 
-TRAIN_DATA_FILE=${DATASET_NAME}.train.raw.txt
-VAL_DATA_FILE=${DATASET_NAME}.val.raw.txt
-TEST_DATA_FILE=${DATASET_NAME}.test.raw.txt
-EXTRACTOR_JAR=JavaExtractor/JPredict/target/JavaExtractorForComments.jar
+# TRAIN_DATA_FILE=${DATASET_NAME}.train.raw.txt
+# VAL_DATA_FILE=${DATASET_NAME}.val.raw.txt
+# TEST_DATA_FILE=${DATASET_NAME}.test.raw.txt
+
+TRAIN_DATA_FILE=functions.train.raw.txt
+VAL_DATA_FILE=functions.val.raw.txt
+TEST_DATA_FILE=functions.test.raw.txt
+EXTRACTOR_JAR=JavaExtractor/JPredict/target/JavaExtractor-0.0.1-SNAPSHOT.jar
 
 mkdir -p data
 mkdir -p data/${DATASET_NAME}
