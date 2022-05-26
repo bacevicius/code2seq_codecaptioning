@@ -19,11 +19,11 @@ public class LeavesCollectorVisitor extends TreeVisitor {
 
     @Override
     public void process(Node node) {
-        // If node has comment add it to leaves. Check if it is not javadoc or contains code.
-        Optional<Comment> com = node.getComment();
-        if(com.isPresent() && !(com.get() instanceof JavadocComment) && !containsCode(com.get().getContent())) {
-          m_Leaves.add(node);
-        }
+        // // If node has comment add it to leaves. Check if it is not javadoc or contains code.
+        // Optional<Comment> com = node.getComment();
+        // if(com.isPresent() && !(com.get() instanceof JavadocComment) && !containsCode(com.get().getContent())) {
+        //   m_Leaves.add(node);
+        // }
 
         if (node instanceof Comment) {
             return;
@@ -43,6 +43,7 @@ public class LeavesCollectorVisitor extends TreeVisitor {
         node.setData(Common.PropertyKey, property);
     }
 
+    //Check whether the comment includes code
     private boolean containsCode(String comment) {
         return ("//" + comment).matches("^\\s*.*;\\s*$");
     }
