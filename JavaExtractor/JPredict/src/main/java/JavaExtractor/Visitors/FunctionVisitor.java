@@ -40,7 +40,6 @@ public class FunctionVisitor extends VoidVisitorAdapter<Object> {
 
         if (comment.isPresent()){
             commentString = comment.get().getContent();
-            System.out.println(commentString);
         }
         else {
             return;
