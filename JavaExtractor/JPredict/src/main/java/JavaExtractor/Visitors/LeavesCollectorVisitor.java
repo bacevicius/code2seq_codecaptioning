@@ -20,10 +20,10 @@ public class LeavesCollectorVisitor extends TreeVisitor {
     @Override
     public void process(Node node) {
         // // If node has comment add it to leaves. Check if it is not javadoc or contains code.
-        // Optional<Comment> com = node.getComment();
-        // if(com.isPresent() && !(com.get() instanceof JavadocComment) && !containsCode(com.get().getContent())) {
-        //   m_Leaves.add(node);
-        // }
+        Optional<Comment> com = node.getComment();
+        if(com.isPresent() && !(com.get() instanceof JavadocComment) && !containsCode(com.get().getContent())) {
+          m_Leaves.add(node);
+        }
 
         if (node instanceof Comment) {
             return;
