@@ -40,6 +40,15 @@ public class CommandLineValues {
     @Option(name = "--max_child_id", required = false)
     public int MaxChildId = 3;
 
+    @Option(name = "--remove_stop_words", required = false)
+    public boolean RemoveStopWords = false;
+
+    @Option(name = "--include_comments", required = false)
+    public boolean IncludeComments = false;
+
+    @Option(name = "--print_ast", required = false)
+    public boolean PrintAST = false;
+
     public CommandLineValues(String... args) throws CmdLineException {
         CmdLineParser parser = new CmdLineParser(this);
         try {

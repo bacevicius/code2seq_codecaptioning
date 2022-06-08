@@ -31,7 +31,7 @@ public class FunctionVisitor extends VoidVisitorAdapter<Object> {
     }
 
     private void visitMethod(MethodDeclaration node) {
-        LeavesCollectorVisitor leavesCollectorVisitor = new LeavesCollectorVisitor();
+        LeavesCollectorVisitor leavesCollectorVisitor = new LeavesCollectorVisitor(m_CommandLineValues);
         leavesCollectorVisitor.visitDepthFirst(node);
         ArrayList<Node> leaves = leavesCollectorVisitor.getLeaves();
 

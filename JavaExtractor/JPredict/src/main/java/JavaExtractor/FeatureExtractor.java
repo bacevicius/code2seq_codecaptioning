@@ -54,14 +54,15 @@ class FeatureExtractor {
         CompilationUnit m_CompilationUnit = parseFileWithRetries(code);
 
         // AST generator code
-
-        // DotPrinter printer = new DotPrinter(true);
-        // try (FileWriter fileWriter = new FileWriter("ast.dot");
-        //     PrintWriter printWriter = new PrintWriter(fileWriter)) {
-        //     printWriter.print(printer.output(m_CompilationUnit));
-        // } catch(Exception e) {
-        //   System.out.println(e);
-        // }
+        if(m_CommandLineValues.PrintAST){
+            DotPrinter printer = new DotPrinter(true);
+            try (FileWriter fileWriter = new FileWriter("ast.dot");
+                PrintWriter printWriter = new PrintWriter(fileWriter)) {
+                printWriter.print(printer.output(m_CompilationUnit));
+            } catch(Exception e) {
+            System.out.println(e);
+            }
+        }
     
         FunctionVisitor functionVisitor = new FunctionVisitor(m_CommandLineValues);
 
