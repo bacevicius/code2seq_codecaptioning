@@ -1,0 +1,24 @@
+Funcom Tokenized Dataset
+
+shuffle.py - create a new train/valid/test split. Splits by project.
+			 functions that appear in a project together all go into the same set.
+			 example: python3 shuffle.py --seed 100 --valid-size 0.05 --test-size 0.02
+			 seed defaults: random
+			 valid-size default: 0.05
+			 test-size default: 0.05
+---
+
+This is a modified dataset by Vidas Bacevičius for the purpose of applying it to the code2seq algorithm for the task of code captioning. 
+
+shuffle.py file was altered to produce three files (train, test, valid) of combined Javadoc + method pairs.
+
+To use this dataset, please download both the filtered and tokenized datasets from http://leclair.tech/data/funcom/, copy the comments file from the filtered dataset and functions.json file from the tokenized dataset. Lastly. copy the fid_pid file from the tokenized dataset.
+
+---
+
+The data files are all tab delimited with function_id	data.
+fid_pid is a text file where each line is a function_id -> project_id mapping. This is used to do the train/valid/test splits.
+
+Prepreocessing
+Source code: removed special characters, removed rare words, split on camel case
+Comments: first line of javadoc, did not include any @words, remove special characters
