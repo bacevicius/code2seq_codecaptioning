@@ -6,6 +6,19 @@ This is an **UNOFFICIAL** implementation of the model described in:
 This is a TensorFlow 2.1 fork of the network inplementation, with Java and C# extractors for preprocessing the input code.
 The official network implementation repository is [https://github.com/tech-srl/code2seq](https://github.com/tech-srl/code2seq)
 
+---
+
+This implementation was further modified to perform research on whether including comments in the training data increases the model's performance for the task of Code Captioning.
+
+To that end, the following changes were made:
+
+ * ```LeavesCollectorVisitor.java``` was modified to include inline comments in AST paths.
+ * ```FunctionVisitor.java``` now predicts JavaDoc comments instead of method names.
+ * The model was changed to use [http://leclair.tech/data/funcom/#tokdata](FunCom dataset). Instructions on how to do that are included in ```funcom_dataset```.
+ * Scripts used for training and score calculation are added in ```code_captioning_scripts```.
+ * Smaller changes to accomodate the training pipeline. 
+
+
 Table of Contents
 =================
   * [Requirements](#requirements)
