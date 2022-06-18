@@ -6,6 +6,7 @@ import org.kohsuke.args4j.CmdLineException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -23,12 +24,13 @@ public class App {
             e.printStackTrace();
             return;
         }
-
-        if (s_CommandLineValues.File != null) {
-            ExtractFeaturesTask extractFeaturesTask = new ExtractFeaturesTask(s_CommandLineValues,
-                    s_CommandLineValues.File.toPath());
-            extractFeaturesTask.processFile();
-        } else if (s_CommandLineValues.Dir != null) {
+        //Removing this, we don't need it
+        // if (s_CommandLineValues.File != null) {
+        //     ExtractFeaturesTask extractFeaturesTask = new ExtractFeaturesTask(s_CommandLineValues,
+        //             s_CommandLineValues.File.toPath());
+        //     extractFeaturesTask.processFile();
+        // } 
+        if (s_CommandLineValues.Dir != null) {
             extractDir();
         }
     }
@@ -38,9 +40,20 @@ public class App {
         LinkedList<ExtractFeaturesTask> tasks = new LinkedList<>();
         try {
             Files.walk(Paths.get(s_CommandLineValues.Dir)).filter(Files::isRegularFile)
-                    .filter(p -> p.toString().toLowerCase().endsWith(".java")).forEach(f -> {
-                ExtractFeaturesTask task = new ExtractFeaturesTask(s_CommandLineValues, f);
-                tasks.add(task);
+                    .filter(p -> p.toString().toLowerCase().endsWith(".jsonl")).forEach(f -> {
+                        // For each file in the directory, read all of its code lines
+                        List<String> codeLines;
+                        try {
+                            codeLines = Files.readAllLines(f);
+                          } catch (IOException e) {
+                            e.printStackTrace();
+                            codeLines = new ArrayList<>();
+                          }
+                        // For each code line create a new ExtractFeaturesTask
+                        codeLines.forEach(line -> {
+                            ExtractFeaturesTask task = new ExtractFeaturesTask(s_CommandLineValues, line);
+                            tasks.add(task);
+                        });
             });
         } catch (IOException e) {
             e.printStackTrace();

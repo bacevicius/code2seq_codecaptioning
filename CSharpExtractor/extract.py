@@ -83,7 +83,6 @@ if __name__ == '__main__':
     parser.add_argument("-dir", "--dir", dest="dir", required=False)
     parser.add_argument("-ofile_name", "--ofile_name", dest="ofile_name", required=True)
     args = parser.parse_args()
-
     if args.dir is not None:
         subdirs = get_immediate_subdirectories(args.dir)
         to_extract = subdirs

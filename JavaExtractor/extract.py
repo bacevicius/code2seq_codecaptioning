@@ -26,6 +26,15 @@ def ExtractFeaturesForDir(args, dir, prefix):
     command = ['java', '-Xmx100g', '-XX:MaxNewSize=60g', '-cp', args.jar, 'JavaExtractor.App',
                '--max_path_length', str(args.max_path_length), '--max_path_width', str(args.max_path_width),
                '--dir', dir, '--num_threads', str(args.num_threads)]
+    if args.include_comments == "true":
+        command.append("--include_comments")
+
+    if args.print_ast == "true":
+        command.append("--print_ast")
+
+    if args.remove_stop_words == "true":
+        command.append("--remove_stop_words")
+
 
     # print command
     # os.system(command)
@@ -34,7 +43,7 @@ def ExtractFeaturesForDir(args, dir, prefix):
     failed = False
     with open(outputFileName, 'a') as outputFile:
         sleeper = subprocess.Popen(command, stdout=outputFile, stderr=subprocess.PIPE)
-        timer = Timer(60 * 60, kill, [sleeper])
+        timer = Timer(60 * 60 * 60 * 60, kill, [sleeper])
 
         try:
             timer.start()
@@ -82,6 +91,10 @@ if __name__ == '__main__':
     parser.add_argument("-j", "--jar", dest="jar", required=True)
     parser.add_argument("-dir", "--dir", dest="dir", required=False)
     parser.add_argument("-file", "--file", dest="file", required=False)
+
+    parser.add_argument("-include_comments", "--include_comments", dest="include_comments", required=False)
+    parser.add_argument("-print_ast", "--print_ast", dest="print_ast", required=False)
+    parser.add_argument("-remove_stop_words", "--remove_stop_words", dest="remove_stop_words", required=False)
     args = parser.parse_args()
 
     if args.file is not None:

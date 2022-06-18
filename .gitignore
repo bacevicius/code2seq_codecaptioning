@@ -2,6 +2,17 @@
 *.lst
 .idea/*
 *.iml
-*.xml
 *.pyc
+*.out
 
+funcom_dataset/valid/
+
+funcom_dataset/train/
+
+funcom_dataset/test/
+
+error_log.txt
+
+JavaExtractor/JPredict/aasd.png
+
+*.dot
