@@ -14,7 +14,7 @@ To that end, the following changes were made:
 
  * ```LeavesCollectorVisitor.java``` was modified to include inline comments in AST paths.
  * ```FunctionVisitor.java``` now predicts JavaDoc comments instead of method names.
- * The model was changed to use [http://leclair.tech/data/funcom/#tokdata](FunCom dataset). Instructions on how to do that are included in ```funcom_dataset```.
+ * The model was changed to use [FunCom dataset](http://leclair.tech/data/funcom/#tokdata). Instructions on how to do that are included in ```funcom_dataset```.
  * Scripts used for training and score calculation are added in ```code_captioning_scripts```.
  * Smaller changes to accomodate the training pipeline. 
 
