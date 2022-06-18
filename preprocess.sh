@@ -23,7 +23,7 @@
 # PYTHON - python3 interpreter alias.
 
 INPUT_DIR=dataset/funcom_dataset
-DATASET_NAME=no_stopwords_with_comments
+DATASET_NAME=with_comments
 
 TRAIN_DIR=${INPUT_DIR}/train
 VAL_DIR=${INPUT_DIR}/valid
@@ -49,13 +49,13 @@ TEST_DATA_FILE=${OUTPUT_DIR}/${DATASET_NAME}.test.raw.txt
 EXTRACTOR_JAR=JavaExtractor/JPredict/target/JavaExtractor-0.0.1-SNAPSHOT.jar
 
 echo "Extracting paths from validation set..."
-${PYTHON} JavaExtractor/extract.py --dir ${VAL_DIR} --max_path_length 8 --max_path_width 2 --num_threads ${NUM_THREADS} --include_comments true --remove_stop_words true  --jar ${EXTRACTOR_JAR} > ${VAL_DATA_FILE} 2>> error_log.txt
+${PYTHON} JavaExtractor/extract.py --dir ${VAL_DIR} --max_path_length 8 --max_path_width 2 --num_threads ${NUM_THREADS} --include_comments true   --jar ${EXTRACTOR_JAR} > ${VAL_DATA_FILE} 2>> error_log.txt
 echo "Finished extracting paths from validation set"
 echo "Extracting paths from test set..."
-${PYTHON} JavaExtractor/extract.py --dir ${TEST_DIR} --max_path_length 8 --max_path_width 2 --num_threads ${NUM_THREADS}  --include_comments true --remove_stop_words true --jar ${EXTRACTOR_JAR} > ${TEST_DATA_FILE} 2>> error_log.txt
+${PYTHON} JavaExtractor/extract.py --dir ${TEST_DIR} --max_path_length 8 --max_path_width 2 --num_threads ${NUM_THREADS}  --include_comments true  --jar ${EXTRACTOR_JAR} > ${TEST_DATA_FILE} 2>> error_log.txt
 echo "Finished extracting paths from test set"
 echo "Extracting paths from training set..."
-${PYTHON} JavaExtractor/extract.py --dir ${TRAIN_DIR} --max_path_length 8 --max_path_width 2 --num_threads  ${NUM_THREADS}  --include_comments true --remove_stop_words true --jar ${EXTRACTOR_JAR} | shuf > ${TRAIN_DATA_FILE} 2>> error_log.txt
+${PYTHON} JavaExtractor/extract.py --dir ${TRAIN_DIR} --max_path_length 8 --max_path_width 2 --num_threads  ${NUM_THREADS}  --include_comments true --jar ${EXTRACTOR_JAR} | shuf > ${TRAIN_DATA_FILE} 2>> error_log.txt
 echo "Finished extracting paths from training set"
 
 TARGET_HISTOGRAM_FILE=${OUTPUT_DIR}/${DATASET_NAME}/${DATASET_NAME}.histo.tgt.c2s
