@@ -8,7 +8,7 @@ The official network implementation repository is [https://github.com/tech-srl/c
 
 ---
 
-This implementation was further modified to perform research on whether including comments in the training data increases the model's performance for the task of Code Captioning.
+This implementation was further modified to perform research on whether including comments in the training data increases the model's performance for the task of Code Captioning. This was done as a part of Research Project 2022, as a final requirement of Bachelor's Degree at Delft University of Technology.
 
 To that end, the following changes were made:
 
