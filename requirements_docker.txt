@@ -1,0 +1,10 @@
+clang
+joblib
+libclang
+lmdb
+networkx
+numpy==1.19.2
+rouge==0.3.2
+tensorflow_addons==0.8.3
+scikit_learn
+flatbuffers

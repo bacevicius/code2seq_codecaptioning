@@ -20,3 +20,5 @@ JavaExtractor/JPredict/aasd.png
 *.jsonl
 
 *.c2s
+
+models/

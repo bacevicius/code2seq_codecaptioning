@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  code2seq_comments:
+    build:
+      context: ""
+      dockerfile: Dockerfile
+    image: ciselab/funcom:latest
+    volumes:
+      # source on local machine: place in container
+      # Question - do I make the preprocessing data available? Do I copy it in dockerfile or make it available here?
+      - ./models:/app/code2seq/models
+
+    environment:
+    # Preprocessing variables
+      preprocess: true
+      comments: true
+      stopwords: true
+    # Training variables
+      train: true
+      trainFromScratch: true
+      continueTrainingFromCheckpoint: false
+    # Evaluation variables
+    # add more flags here
+
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
