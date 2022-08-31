@@ -1,1 +1,0 @@
-This is where the Funcom dataset should be placed to start preprocessing and training. See preprocess.sh and train_gpu scripts for more details.
