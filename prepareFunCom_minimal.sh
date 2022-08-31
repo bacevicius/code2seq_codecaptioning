@@ -10,8 +10,8 @@ cd datasets/funcom/dataset
 # wget http://leclair.tech/data/funcom/index_v5.html#tokdata
 
 # Or: copy an existing dataset
-cp ../../../funcom_dataset/funcom_filtered.tar.gz funcom_filtered.tar.gz
-cp ../../../funcom_dataset/funcom_tokenized.tar.gz funcom_tokenized.tar.gz
+cp ../../../data/funcom_filtered.tar.gz funcom_filtered.tar.gz
+cp ../../../data/funcom_tokenized.tar.gz funcom_tokenized.tar.gz
 # ------------ 
 
 # Unzip the downloaded archives
