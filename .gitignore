@@ -18,3 +18,5 @@ JavaExtractor/JPredict/aasd.png
 *.dot
 
 *.jsonl
+
+*.c2s
