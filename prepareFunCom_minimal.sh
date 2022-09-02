@@ -6,12 +6,12 @@ cd datasets/funcom/dataset
 
 # ------------ 
 # Download and unzip tokenized and filtered datasets
-# wget https://s3.us-east-2.amazonaws.com/leclair.tech/data/funcom/funcom_filtered.tar.gz
-# wget https://s3.us-east-2.amazonaws.com/leclair.tech/data/funcom/funcom_tokenized.tar.gz
+wget https://s3.us-east-2.amazonaws.com/leclair.tech/data/funcom/funcom_filtered.tar.gz
+wget https://s3.us-east-2.amazonaws.com/leclair.tech/data/funcom/funcom_tokenized.tar.gz
 
 # Or: copy an existing dataset
-cp ../../../data/funcom_filtered.tar.gz funcom_filtered.tar.gz
-cp ../../../data/funcom_tokenized.tar.gz funcom_tokenized.tar.gz
+# cp ../../../data/funcom_filtered.tar.gz funcom_filtered.tar.gz
+# cp ../../../data/funcom_tokenized.tar.gz funcom_tokenized.tar.gz
 # ------------ 
 
 # Unzip the downloaded archives
